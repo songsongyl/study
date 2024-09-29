@@ -36,6 +36,8 @@ alter user 'root'@'localhost' identified by '新密码';exit退出
 https://blog.csdn.net/weixin_43608968/article/details/133814361
 #### 13.运行脚本命令
 首先要进入脚本所在目录 之后在docker compose up -d 关闭脚本是docker compose down
+运行脚本出错 validating /home/services/tomcat/docker-compose.yaml: (root) Additional prop
+原因是yaml格式缩进问题 要仔细
  
 
 
