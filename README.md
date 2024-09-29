@@ -34,6 +34,8 @@ alter user 'root'@'localhost' identified by '新密码';exit退出
 #### 11.2024.9.29 新建web项目 拉取tomcat10和java21的镜像 编写脚本
 #### 12.Error response from daemon: Get https://index.docker.io/v1/search?q=zookeeper&n=25: dial tcp: lookup index.docker.io on 192.168.xxx.x:xx: read udp 192.168.xx.xx:xxxxx->192.168.xx.xx:xxxx: i/o timeout
 https://blog.csdn.net/weixin_43608968/article/details/133814361
+#### 13.运行脚本命令
+首先要进入脚本所在目录 之后在docker compose up -d 关闭脚本是docker compose down
  
 
 
