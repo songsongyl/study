@@ -58,10 +58,9 @@ docker exec -it 容器名 bash 进入bash命令行 运行mysql -uroot -p
   docker run 镜像名字
 - 删除镜像 ：
   docker rmi  镜像名/镜像ID #若镜像在运行则会报错  
-  docker rmi -f 镜像名/镜像ID #强制删除一个  
-docker rmi -f 镜像名/镜像ID  #删除多个 其镜像ID或镜像用用空格隔开即可  
+  docker rmi -f 镜像名/镜像ID #强制删除一个 删除多个 其镜像ID或镜像用用空格隔开即可  
 docker rmi -f $(docker images -aq)  
-#删除全部镜像  -a 意思为显示全部, -q 意思为只显示ID
+删除全部镜像  -a 意思为显示全部, -q 意思为只显示ID
 - 加载镜像：
   docker load -i 镜像保存文件位置
 -  保存镜像：
@@ -88,7 +87,7 @@ docker rmi -f $(docker images -aq)
 - 创建容器数据卷挂载：
 创建容器并指定数据卷，注意通过 -v 参数来指定数据卷  
 docker run -d --name nginx -p 80:80 -v html:/usr/share/nginx/html nginx  
--删除数据卷:
+- 删除数据卷:
   docker volume rm 数据卷名
 - 修改mysql密码命令:  
 flush privileges;  
@@ -112,6 +111,7 @@ https://blog.csdn.net/weixin_43608968/article/details/133814361
 4. Error response from daemon: Get "https://registry-1.docker.io/v2/": net/http  
 可能是网络问题 https://blog.csdn.net/m624197265/article/details/141719515  
 https://blog.csdn.net/jks212454/article/details/126326299  
+ https://blog.csdn.net/qq_52712971/article/details/141862621  
 重启docker出错 Job for docker.service failed because the control process exited with error
 https://blog.csdn.net/weixin_46214729/article/details/140790837  
 5. Failed to restart docker.service: Unit is not loaded properly: Invalid argum
