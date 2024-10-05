@@ -1,6 +1,6 @@
 # Learning Warehouse
 ### Outline：本仓库用于记录各种技术栈学习过程  
-### 一.docker
+### 一. docker
 **<font color="#FF8C00">Process</font>**  
 
 
@@ -92,7 +92,7 @@ docker run -d --name nginx -p 80:80 -v html:/usr/share/nginx/html nginx
 - 修改mysql密码命令:  
 flush privileges;  
 alter user 'root'@'localhost' identified by '新密码';exit退出  
-### 二.tomcat
+### 二. tomcat
 
 
 **<font color="#FF8C00">Process</font>**  
@@ -101,7 +101,7 @@ alter user 'root'@'localhost' identified by '新密码';exit退出
 <font color="#E9967A">Update  : 2024.9.26 </font>
 
 1. 新建web项目  声明war包和新建webapp
-2. 拉取tomcat10和java21的镜像 编写脚本 映射端口  
+2. 拉取tomcat10.1和java21的镜像 编写脚本 映射端口  
 Error response from daemon: Get https://index.docker.io/v1/search?q=zookeeper&n=25: dial tcp: lookup index.docker.io on 192.168.xxx.x:xx: read udp 192.168.xx.xx:xxxxx->192.168.xx.xx:xxxx: i/o timeout  
 https://blog.csdn.net/weixin_43608968/article/details/133814361  
 3. 运行脚本命令  
@@ -117,7 +117,7 @@ https://blog.csdn.net/weixin_46214729/article/details/140790837
 5. Failed to restart docker.service: Unit is not loaded properly: Invalid argum
 https://blog.csdn.net/qq_36639113/article/details/138846529  
 发现daemon配置文件多加了一个，
-
+6. 发现最新加速地址 https://blog.csdn.net/llc580231/article/details/139979603#:~:text=%E7%BD%91%E6%98%93%E9%95%9C%E5%83%8F%E4%B8%AD%E5%BF%83%EF%BC%9Ahtt
 
 **<font color="#FF8C00">Command</font>** 
 - 运行脚本: docker compose up -d
