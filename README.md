@@ -1,6 +1,6 @@
-# Learning Warehouse
+# Linus-docker
 ### Outline：本仓库用于记录各种技术栈学习过程  
-### 一. docker
+### 一. mysql
 **<font color="#FF8C00">Process</font>**  
 
 
@@ -94,6 +94,23 @@ docker run -d --name nginx -p 80:80 -v html:/usr/share/nginx/html nginx
 - 修改mysql密码命令:  
 flush privileges;  
 alter user 'root'@'localhost' identified by '新密码';exit退出  
+- 脚本命令：
+~~~
+services:
+  public-mysql:
+    restart: always
+    image: mysql:8
+    container_name: mysql
+    volumes:
+      - ./data/:/var/lib/mysql/
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: 123456
+    command:
+      --max_connections=2500
+    ports:
+      - 3306:3306
+~~~
 ### 二. tomcat
 
 
@@ -102,7 +119,29 @@ alter user 'root'@'localhost' identified by '新密码';exit退出
 
 <font color="#E9967A">Update  : 2024.9.26 </font>
 
-1. 新建web项目  声明war包和新建webapp
+1. 新建web项目  声明war包和相关依赖以及新建webapp文件夹 添加tomcat配置
+~~~
+ <dependencies>
+        <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+            </plugin>
+        </plugins>
+    </build>
+~~~
 2. 拉取tomcat10.1和java21的镜像 编写脚本 映射端口  
 Error response from daemon: Get https://index.docker.io/v1/search?q=zookeeper&n=25: dial tcp: lookup index.docker.io on 192.168.xxx.x:xx: read udp 192.168.xx.xx:xxxxx->192.168.xx.xx:xxxx: i/o timeout  
 https://blog.csdn.net/weixin_43608968/article/details/133814361  
@@ -125,10 +164,34 @@ https://blog.csdn.net/qq_36639113/article/details/138846529
 <font color="#E9967A">Update  : 2024.10.8 </font>
 
 
-7. 拉取tomcat失败 返回之前的备份 重新拉取mysql和tomcat
+7. 拉取tomcat失败 返回之前的备份 运用脚本重新拉取mysql和tomcat  
+8. 复制war包到webapps包下 它会自动解压 可以ls查看解压之后的目录 之后就可以在游览器访问  
+https://github.com/bwhyman/linux-docker-examples/tree/master/examples  
+
+
+**完毕完毕！**
+
+
+
    **<font color="#FF8C00">Command</font>** 
 - 运行脚本: docker compose up -d
 - 关闭脚本：docker compose down
+~~~
+services:
+  tomcat:
+    image: tomcat:10.1-jdk21
+    volumes:
+      - ./webapps/:/usr/local/tomcat/webapps/
+      - ./logs/:/usr/local/tomcat/logs/
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - 8080:8080
+~~~
+- 更改加速地址之后：  
+  sudo systemctl daemon-reload
+  sudo systemctl restart docker
+  systemctl status docker
 
  
 
