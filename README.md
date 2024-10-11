@@ -164,7 +164,7 @@ https://blog.csdn.net/qq_36639113/article/details/138846529
 <font color="#E9967A">Update  : 2024.10.8 </font>
 
 
-7. 拉取tomcat失败 返回之前的备份 运用脚本重新拉取mysql和tomcat  
+7. 拉取tomcat失败 返回之前的备份！ 运用脚本重新拉取mysql和tomcat  
 8. 复制war包到webapps包下 它会自动解压 可以ls查看解压之后的目录 之后就可以在游览器访问  
 https://github.com/bwhyman/linux-docker-examples/tree/master/examples  
 
@@ -175,7 +175,8 @@ https://github.com/bwhyman/linux-docker-examples/tree/master/examples
 
    **<font color="#FF8C00">Command</font>** 
 - 运行脚本: docker compose up -d
-- 关闭脚本：docker compose down
+- 关闭脚本：docker compose down  
+脚本：
 ~~~
 services:
   tomcat:
