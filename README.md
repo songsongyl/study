@@ -201,7 +201,21 @@ services:
 
 **<font color="#FF8C00">Process</font>**  
 
-1. 创建web-project服务目录，编写脚本整合mysql+tomcat2个子服务
+1. 在services目录下创建web-project服务目录，编写脚本整合mysql+tomcat2个子服务
+2. 在之前的tomcat项目中添加jdbc依赖 编写context.xml文件声明数据源配置 数据源地址为和初始化数据库
+~~~
+<?xml version="1.0" encoding="UTF-8" ?>
+<Context>
+    <Resource name="jdbc/MySQL" type="javax.sql.DataSource" maxTotal="100" maxIdle="30"
+            maxWaitMillis="10000" initialSize="1" username="root" password="123456" driverClassName="com.mysql.cj.jdbc.Driver"
+            url="jdbc:mysql://127.0.0.1:13306/syl"
+    />
+
+
+</Context>
+~~~
+重新打包部署到服务器
+3. 创建容器测试一下
 
 
  
