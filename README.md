@@ -165,7 +165,7 @@ https://blog.csdn.net/qq_36639113/article/details/138846529
 
 
 7. 拉取tomcat失败 返回之前的备份！ 运用脚本重新拉取mysql和tomcat  
-8. 复制war包到webapps包下 它会自动解压 可以ls查看解压之后的目录 之后就可以在游览器访问  
+8. 复制war包到webapps包下 它会自动解压 可以ls查看解压之后的目录 之后就可以在游览器访问   
 https://github.com/bwhyman/linux-docker-examples/tree/master/examples  
 
 
@@ -208,7 +208,7 @@ services:
     image: mysql:8
     restart: always
     ports:
-      - '3306:3306'
+      - 3307:3306
     volumes:
       - ./mysql/data/:/var/lib/mysql/
     environment:
@@ -223,7 +223,7 @@ services:
       timeout: 3s
       retries: 3
   tomcat:
-    image: tomcat:10.1.2-jre21
+    image: tomcat:10.1-jdk21
     depends_on:
        mysql:
           condition: service_healthy
@@ -236,7 +236,7 @@ services:
       - 8080:8080
 
 ~~~
-2. 在之前的tomcat项目中添加jdbc依赖 编写context.xml文件声明数据源配置 数据源地址为和初始化数据库
+2. 在之前的tomcat项目中添加jdbc依赖等等 编写context.xml文件声明数据源配置 数据源地址为和初始化数据库
 ~~~
 <?xml version="1.0" encoding="UTF-8" ?>
 <Context>
@@ -248,8 +248,25 @@ services:
 
 </Context>
 ~~~
-重新打包部署到服务器
-3. 创建容器测试一下
+重新打包部署到服务器 容器运行起来才能自动解压  
+浏览器http://localhost:18080/tomcat-vbox-1.0-SNAPSHOT
+3. 创建容器测试一下 创建表看看网页能否显示数据库内容 建立servlet和jsp 结果显示失败
+4. Cannot create JDBC driver of class '' for connect URL 'null'  
+感觉是之前mysql容器还在用3306端口运行 没有停掉然后出现端口冲突 所以创建容器用3307端口映射3306端口 然后没有在虚拟机配置13307映射3307 决定将容器删掉重来  
+docker compose -f docker-compose.yaml down -v 同时删掉数据卷 再删除日志和mysql数据  rm -r 太多了删不完 rm -rf 这个一键删除
+5. java.net.ConnectException: Connection refused: connection  
+   原来是虚拟机未开启 没有联网
+6. 将之前mysql容器停掉 用3306映射3306创建新的容器 
+7. docker compose 为多子服务创建网络实现互交访问  
+https://blog.csdn.net/feiying0canglang/article/details/127991493
+
+
+
+**<font color="#FF8C00">Command</font>** 
+
+- 删除容器加数据卷： docker compose -f docker-compose.yaml down -v  
+- rm -r 效率太低
+- rm -rf 一键删除
 
 
  
