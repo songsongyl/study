@@ -257,11 +257,12 @@ docker compose -f docker-compose.yaml down -v 同时删掉数据卷 再删除日
 5. java.net.ConnectException: Connection refused: connection  
    原来是虚拟机未开启 没有联网
 6. 将之前mysql容器停掉 用3306映射3306创建新的容器 还是没有成功显示 驱动问题仍然存在
-7. 
+7. context url应该写成mysql：3306 因为是两个容器之间访问 利用compose就可以通过services中声明的名称加端口访问
+8. 啊啊啊啊 原来是把MEAT-INF写成WETA-INF了 改完了就对了 啊啊啊
 9. docker compose 为多子服务创建网络实现互交访问  
 https://blog.csdn.net/feiying0canglang/article/details/127991493
 
-
+**完毕完毕！**
 
 **<font color="#FF8C00">Command</font>** 
 
