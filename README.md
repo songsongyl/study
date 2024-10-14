@@ -201,7 +201,41 @@ services:
 
 **<font color="#FF8C00">Process</font>**  
 
-1. 在services目录下创建web-project服务目录，编写脚本整合mysql+tomcat2个子服务
+1. 在services目录下创建web-project服务目录，编写脚本整合mysql+tomcat2个子服务 tomcat声明依赖mysql服务和开启健康监测
+~~~
+services:
+  mysql:
+    image: mysql:8
+    restart: always
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql/data/:/var/lib/mysql/
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: 123456
+    command:
+      --max_connections=2500
+    healthcheck:
+      # test: mysql --user=root --password=1157 -e "select 1;"
+      test: mysql -uroot -p$$MYSQL_ROOT_PASSWORD -e "select 1;"
+      interval: 10s
+      timeout: 3s
+      retries: 3
+  tomcat:
+    image: tomcat:10.1.2-jre21
+    depends_on:
+       mysql:
+          condition: service_healthy
+    volumes:
+      - ./webapps/:/usr/local/tomcat/webapps/
+      - ./logs/:/usr/local/tomcat/logs/
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - 8080:8080
+
+~~~
 2. 在之前的tomcat项目中添加jdbc依赖 编写context.xml文件声明数据源配置 数据源地址为和初始化数据库
 ~~~
 <?xml version="1.0" encoding="UTF-8" ?>
