@@ -256,8 +256,9 @@ services:
 docker compose -f docker-compose.yaml down -v 同时删掉数据卷 再删除日志和mysql数据  rm -r 太多了删不完 rm -rf 这个一键删除
 5. java.net.ConnectException: Connection refused: connection  
    原来是虚拟机未开启 没有联网
-6. 将之前mysql容器停掉 用3306映射3306创建新的容器 
-7. docker compose 为多子服务创建网络实现互交访问  
+6. 将之前mysql容器停掉 用3306映射3306创建新的容器 还是没有成功显示 驱动问题仍然存在
+7. 
+9. docker compose 为多子服务创建网络实现互交访问  
 https://blog.csdn.net/feiying0canglang/article/details/127991493
 
 
