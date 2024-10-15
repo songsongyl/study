@@ -259,9 +259,11 @@ docker compose -f docker-compose.yaml down -v 同时删掉数据卷 再删除日
 6. 将之前mysql容器停掉 用3306映射3306创建新的容器 还是没有成功显示 驱动问题仍然存在
 7. context url应该写成mysql：3306 因为是两个容器之间访问 利用compose就可以通过services中声明的名称加端口访问
 8. 啊啊啊啊 原来是把MEAT-INF写成WETA-INF了 改完了就对了 啊啊啊
+![success](./images/img.png)
 9. docker compose 为多子服务创建网络实现互交访问  
 https://blog.csdn.net/feiying0canglang/article/details/127991493
-
+10. 注意生产环境下和部署环境下context文件中url数据库地址和端口  
+部署mysql：3306  生产127.0.0.1：13306
 **完毕完毕！**
 
 **<font color="#FF8C00">Command</font>** 
