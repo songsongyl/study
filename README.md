@@ -264,6 +264,11 @@ docker compose -f docker-compose.yaml down -v 同时删掉数据卷 再删除日
 https://blog.csdn.net/feiying0canglang/article/details/127991493
 10. 注意生产环境下和部署环境下context文件中url数据库地址和端口  
 部署mysql：3306  生产127.0.0.1：13306
+
+部署之前的项目  访问http://localhost:18080/web-experiment-1.0-SNAPSHOT
+![index](./images/img_1.png)
+nefu系统
+![nefu](./images/)
 **完毕完毕！**
 
 **<font color="#FF8C00">Command</font>** 
