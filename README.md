@@ -273,9 +273,9 @@ https://blog.csdn.net/feiying0canglang/article/details/127991493
 部署之前的项目  访问http://localhost:18080/web-experiment-1.0-SNAPSHOT
 ![index](asserts/images/img_1.png)
 
-[//]: # (nefu系统)
+nefu系统
 
-[//]: # (![nefu]&#40;asserts/images/&#41;)
+![nefu](asserts/images/img_2.png)
 **完毕完毕！**
 
 **<font color="#FF8C00">Command</font>** 
