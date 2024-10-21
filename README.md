@@ -14,12 +14,12 @@ https://blog.csdn.net/qq_43726042/article/details/105913613
 3.在linux中安装docker 方便封装和部署 每一个容器是linus操作系统内核    
 https://docs.docker.com/engine/install/centos/  
 4.sudo yum install -y yum-utils 报错问题  
-https://blog.csdn.net/weixin_43490087/article/details/141924032 4步检查 yum源换成国内镜像源
+https://blog.csdn.net/weixin_43490087/article/details/141924032  
+4步检查 yum源换成国内镜像源
 https://blog.csdn.net/superiony/article/details/140505523 修改仓库  
 https://blog.csdn.net/jingling555/article/details/140361046?ops_request_misc=%257B%2522request%255Fid%2522%253A%25220D2EEF54-39C8-4EEC-803F-E05008D7C36B%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=0D2EEF54-39C8-4EEC-803F-E05008D7C36B&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-1-140361046-null-null.nonecase&utm_term=docker&spm=1018.2226.3001.4450  
 5.获取密钥失败问题  
-重新更换镜像  
-
+重新更换镜像
 6、hello world运行失败或超时 配置阿里云镜像加速器失败  
 https://blog.csdn.net/quanqxj/article/details/79479943/ 添加可用ip(不知道是否有用）  
 https://www.cnblogs.com/paul-liang/p/18384633 配置加速地址  
@@ -199,10 +199,10 @@ services:
 ### 三. 整合tomcat和 mysql
 
 
-**<font color="#FF8C00">Process</font>**  
+**<font color="#FF8C00">Process</font>**   
 
 
-<font color="#E9967A">Update  : 2024.10.13 </font>
+<font color="#E9967A">Update  : 2024.10.13 </font>  
 1. 在services目录下创建web-project服务目录，编写脚本整合mysql+tomcat2个子服务 tomcat声明依赖mysql服务和开启健康监测
 ~~~
 services:
@@ -251,23 +251,24 @@ services:
 </Context>
 ~~~
 重新打包部署到服务器 容器运行起来才能自动解压  
-浏览器http://localhost:18080/tomcat-vbox-1.0-SNAPSHOT
-3. 创建容器测试一下 创建表看看网页能否显示数据库内容 建立servlet和jsp 结果显示失败
-4. Cannot create JDBC driver of class '' for connect URL 'null'  
-感觉是之前mysql容器还在用3306端口运行 没有停掉然后出现端口冲突 所以创建容器用3307端口映射3306端口 然后没有在虚拟机配置13307映射3307 决定将容器删掉重来  
-docker compose -f docker-compose.yaml down -v 同时删掉数据卷 再删除日志和mysql数据  rm -r 太多了删不完 rm -rf 这个一键删除
-5. java.net.ConnectException: Connection refused: connection  
-   原来是虚拟机未开启 没有联网
-6. 将之前mysql容器停掉 用3306映射3306创建新的容器 还是没有成功显示 驱动问题仍然存在
+浏览器http://localhost:18080/tomcat-vbox-1.0-SNAPSHOT  
+3.创建容器测试一下 创建表看看网页能否显示数据库内容 建立servlet和jsp 结果显示失败
+Cannot create JDBC driver of class '' for connect URL 'null'  
+4.感觉是之前mysql容器还在用3306端口运行 没有停掉然后出现端口冲突 所以创建容器用3307端口映射3306端口 然后没有在虚拟机配置13307映射3307 决定将容器删掉重来  
+docker compose -f docker-compose.yaml down -v 同时删掉数据卷 再删除日志和mysql数据  
+rm -r 太多了删不完 rm -rf 这个一键删除  
+5.java.net.ConnectException: Connection refused: connection  
+   原来是虚拟机未开启 没有联网  
+6.将之前mysql容器停掉 用3306映射3306创建新的容器 还是没有成功显示 驱动问题仍然存在
 
 
-<font color="#E9967A">Update  : 2024.10.15 </font>
-7. context url应该写成mysql：3306 因为是两个容器之间访问 利用compose就可以通过services中声明的名称加端口访问
-8. 啊啊啊啊 原来是把MEAT-INF写成WETA-INF了 改完了就对了 啊啊啊
-![success](asserts/images/img.png)
-9. docker compose 为多子服务创建网络实现互交访问  
+<font color="#E9967A">Update  : 2024.10.15 </font>  
+7.context url应该写成mysql：3306 因为是两个容器之间访问 利用compose就可以通过services中声明的名称加端口访问  
+8.啊啊啊啊 原来是把MEAT-INF写成WETA-INF了 改完了就对了 啊啊啊
+![success](asserts/images/img.png)  
+9.docker compose 为多子服务创建网络实现互交访问    
 https://blog.csdn.net/feiying0canglang/article/details/127991493
-10. 注意生产环境下和部署环境下context文件中url数据库地址和端口  
+10.注意生产环境下和部署环境下context文件中url数据库地址和端口  
 部署mysql：3306  生产127.0.0.1：13306
 
 部署之前的项目  访问http://localhost:18080/web-experiment-1.0-SNAPSHOT
@@ -275,8 +276,8 @@ https://blog.csdn.net/feiying0canglang/article/details/127991493
 
 nefu系统
 
-![nefu](asserts/images/img_2.png)
-**完毕完毕！**
+![nefu](asserts/images/img_2.png)  
+**完毕完毕！**  
 
 **<font color="#FF8C00">Command</font>** 
 
