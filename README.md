@@ -291,7 +291,7 @@ nefu系统
 **<font color="#FF8C00">Process</font>**  
 
 <font color="#E9967A">Update  : 2024.10.19 </font> 
-1. 创建docker-compose脚本
+1. 创建整合nginx+openjdk+mysql docker-compose脚本
 ~~~
 services:
   mysql:
@@ -350,7 +350,7 @@ services:
 
 ~~~
 2. 为了安全性创建.env文件保存密码等私密信息 后续yaml通过${}访问变量  
-3. 
+3. 重新创建脚本中指定服务的容器
 
 
 
