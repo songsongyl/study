@@ -291,7 +291,66 @@ nefu系统
 **<font color="#FF8C00">Process</font>**  
 
 <font color="#E9967A">Update  : 2024.10.19 </font> 
+1. 创建docker-compose脚本
+~~~
+services:
+  mysql:
+    image: mysql:8
+    restart: always
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql/data/:/var/lib/mysql/
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: ${mysql_pwd}
+      MYSQL_DATABASE: syl
+    command:
+      --max_connections=2500
+    healthcheck:
+      # test: mysql --user=root --password=1157 -e "select 1;"
+      test: mysql -uroot -p$$MYSQL_ROOT_PASSWORD -e "select 1;"
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
+  openjdk:
+    image: openjdk:21
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - '8080'
+    volumes:
+      - ./openjdk/:/home/
+    environment:
+      dhost: mysql:3306
+      dusername: root
+      dpassword: ${mysql_pwd}
+      dingtalk_appkey: ${dingtalk_appkey}
+      dingtalk_appsecret: ${dingtalk_appsecret}
+      dingtalk_agentid: ${dingtalk_agentid}
+      secretkey: ${secretkey}
+      TZ: Asia/Shanghai
+    command: java -jar /home/invigilation-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+
+  nginx:
+    image: nginx:1.25
+    restart: always
+    depends_on:
+      - openjdk
+    ports:
+      - '80:80'
+    environment:
+      - bhost=openjdk:8080
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html:ro
+      - ./nginx/templates:/etc/nginx/templates
+
+~~~
+2. 为了安全性创建.env文件保存密码等私密信息 后续yaml通过${}访问变量  
+3. 
 
 
 
