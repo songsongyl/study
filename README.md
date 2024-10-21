@@ -252,7 +252,7 @@ services:
 ~~~
 重新打包部署到服务器 容器运行起来才能自动解压  
 浏览器http://localhost:18080/tomcat-vbox-1.0-SNAPSHOT  
-3.创建容器测试一下 创建表看看网页能否显示数据库内容 建立servlet和jsp 结果显示失败
+3. 创建容器测试一下 创建表看看网页能否显示数据库内容 建立servlet和jsp 结果显示失败
 Cannot create JDBC driver of class '' for connect URL 'null'  
 4.感觉是之前mysql容器还在用3306端口运行 没有停掉然后出现端口冲突 所以创建容器用3307端口映射3306端口 然后没有在虚拟机配置13307映射3307 决定将容器删掉重来  
 docker compose -f docker-compose.yaml down -v 同时删掉数据卷 再删除日志和mysql数据  
